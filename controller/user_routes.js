@@ -7,7 +7,7 @@ const bcrypt = require('bcryptjs')
 /////////////Create a router/////////////
 const router = express.Router()
 
-////////////list out our routes//////////
+////////////////Our Routes//////////
 /// two sign up routes
 /// one GET to show the form
 router.get('/signup', (req, res) => {
@@ -38,8 +38,12 @@ router.post('/signup', async (req, res) => {
         res.json(error)
     })
 })
+
 /// two login routes
 /// one GET to show the form
+router.get('/login', (req, res) => {
+    res.render('users/login')
+})
 /// one POST to login and create session
 
 /// logout route
