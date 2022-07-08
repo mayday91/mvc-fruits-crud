@@ -1,3 +1,12 @@
 body {
     background-color: purple;
 }
+
+.card {
+    background-color: fuchsia;
+    margin: 5px;
+}
+
+.display-6{
+    text-align: center;
+}
