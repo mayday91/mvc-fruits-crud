@@ -14,3 +14,8 @@ body {
 .new-fruit{
     text-align: center;
 }
+
+.navbar-dark{
+    justify-content: left;
+}
+
