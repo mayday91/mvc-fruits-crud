@@ -93,31 +93,31 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// seed route
+// seed route has been moved to models/seed.js
 // insert many items into our database with just going to this route
 // localhost:3000/fruits/seed
-router.get('/seed', (req, res,) => {
-    const startFruits = [
-        { name: "Orange", color: "orange", readyToEat: true },
-        { name: "Grape", color: "purple", readyToEat: true },
-        { name: "Banana", color: "green", readyToEat: false },
-        { name: "Strawberry", color: "red", readyToEat: true },
-        { name: "Coconut", color: "brown", readyToEat: false },
-      ]
+// router.get('/seed', (req, res,) => {
+//     const startFruits = [
+//         { name: "Orange", color: "orange", readyToEat: true },
+//         { name: "Grape", color: "purple", readyToEat: true },
+//         { name: "Banana", color: "green", readyToEat: false },
+//         { name: "Strawberry", color: "red", readyToEat: true },
+//         { name: "Coconut", color: "brown", readyToEat: false },
+//       ]
 
-    // delete if we have fruits  
-    Fruit.deleteMany({})
-        // insert data
-        .then(() => {
-            Fruit.create(startFruits)
-            // return this data as json to view
-            .then(data => {
-                res.json(data)
-            })
-            .catch(console.error)
-        })
+//     // delete if we have fruits  
+//     Fruit.deleteMany({})
+//         // insert data
+//         .then(() => {
+//             Fruit.create(startFruits)
+//             // return this data as json to view
+//             .then(data => {
+//                 res.json(data)
+//             })
+//             .catch(console.error)
+//         })
     
-})
+// })
 
 router.get('/fruits', (req, res) => {
     res.send('Fruits Page')
