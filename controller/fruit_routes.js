@@ -54,6 +54,10 @@ router.get('/new', (req, res) => {
 //POST - Create
 router.post('/', (req, res) => {
     req.body.readyToEat = req.body.readyToEat === 'on' ? true : false
+
+    // now that we have user specific routes, we'll add a username upon creation
+    // when we login we save username to session object
+    req.body.username = req.session.username
     Fruit.create(req.body)
     .then(fruit => {
         res.redirect('/fruits')
@@ -75,6 +79,18 @@ router.get('/', (req, res) => {
     })
     .catch(err => {
         res.json(err)
+    })
+})
+
+router.get('/mine', (req, res) => {
+    // find fruits associated with logged in user
+    Fruit.find({ username: req.session.username })
+    .then(fruits => {
+        res.render('fruits/index', { fruits })
+    })
+    .catch(error => {
+        console.log(error)
+        res.json(error)
     })
 })
 
