@@ -22,14 +22,27 @@ app.use(methodOverride('_method'))
 app.use(express.urlencoded({ extended: false }))
 // to serve files from public statically
 app.use(express.static('public'))
+// bring in session middleware
+const session = require('express-session')
+const MongoStore = require('connect-mongo')
+// middleware that sets up sessions
+app.use(
+	session({
+		secret: process.env.SECRET,
+		store: MongoStore.create({
+			mongoUrl: process.env.DATABASE_URI
+		}),
+		saveUninitialized: true,
+		resave: false,
+
+	})	
+)
+
 
 const fruitRoutes = require('./controller/fruit_routes')
 
-app.use('/fruits', fruitRoutes)
-
 const userRoutes = require('./controller/user_routes')
 
-app.use('/users', userRoutes)
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
@@ -37,6 +50,8 @@ app.get('/', (req, res) => {
 	res.redirect('/fruits')
 })
 
+app.use('/fruits', fruitRoutes)
+app.use('/users', userRoutes)
 ////////////////////////////////////////////
 // Server Listener
 ////////////////////////////////////////////

@@ -45,7 +45,46 @@ router.get('/login', (req, res) => {
     res.render('users/login')
 })
 /// one POST to login and create session
+router.post('/login', async (req, res) => {
+    console.log('this is the request object', req)
+    // destructure data from request body
+    const { username, password } = req.body
+    // console.log('this is username', username)
+    // console.log('this is password', password)
 
+    // first we find user
+    User.findOne({ username })
+    // check if user exists
+    .then(async (user) => {
+        // if they do we compare passwords to ensure its correct then use newly created session object
+            if (user) {
+                //compare password
+                //bcrypt.compare evaluates to truthy or falsy value
+                const result = await bcrypt.compare(password, user.password)
+
+                if (result) {
+                    //if compare comes back truthy we store user properties in session
+                    req.session.username = username
+                    req.session.loggedIn = true
+                    // redirect to '/fruits' page
+                    console.log('this is session after login', req.session)
+                    res.redirect('/fruits')
+                } else {
+                    // send json error
+                    res.json({ error: 'username or password incorrect' })
+                }
+            } else {
+                // send error if user doesnt exist
+                res.json({ error: 'user does not exist' })
+            }
+        // otherwise (pw incorrect) send error message
+        })
+        // if not redirect to sign up page
+        .catch(error => {
+            console.log(error)
+            res.json(error)
+        })
+})
 /// logout route
 /// can be a GET that calls destroy on our session
 /// we can add an 'are you sure?' page if there is time
