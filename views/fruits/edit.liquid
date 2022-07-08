@@ -1,0 +1,10 @@
+{% layout 'layout.liquid' %}
+
+{% block content %}
+<form action="/fruits/{{fruit._id}}?_method=PUT"  method="POST">
+    <input type="text" name="name" placeholder="{{fruit.name}}">
+    <input type="text" name="color" placeholder="{{fruit.color}}">
+    <input type="checkbox" name="readyToEat" placeholder="Is it ripe?">
+    <input type="submit" value="Edit Fruit">
+</form>
+{% endblock %}

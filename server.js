@@ -23,6 +23,11 @@ app.use(express.urlencoded({ extended: false }))
 // to serve files from public statically
 app.use(express.static('public'))
 
+const fruitRoutes = require('./controller/fruit_routes')
+
+app.use('/fruits', fruitRoutes)
+
+
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////

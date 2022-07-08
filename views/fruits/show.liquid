@@ -1,0 +1,10 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <p>Name: {{fruit.name}}</p>
+    <p>Color: {{fruit.color}}</p>
+    <p>Ripe: {{fruit.readyToEat}}</p>
+    <a href="{{fruit._id}}/edit">Edit Fruit</a>
+    <form action="/fruits/{{fruit._id}}?_method=DELETE"method="POST">
+        <input type="submit" value="Delete">    
+    </form>
+{% endblock %}
