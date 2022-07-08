@@ -27,7 +27,9 @@ const fruitRoutes = require('./controller/fruit_routes')
 
 app.use('/fruits', fruitRoutes)
 
+const userRoutes = require('./controller/user_routes')
 
+app.use('/users', userRoutes)
 ////////////////////////////////////////////
 // Routes
 ////////////////////////////////////////////
